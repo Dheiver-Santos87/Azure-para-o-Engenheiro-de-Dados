@@ -272,8 +272,8 @@ O Microsoft Spark Utilities (MSSparkUtils) é um pacote interno para ajudá-lo a
 Para saber mais sobre os tópicos abordados neste laboratório, use estes recursos:
 
 - [Apache Spark no Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-overview)
-- [Anunciando o conector de dados do Azure Data Explorer para o Azure Synapse](https://techcommunity.microsoft.com/t5/azure-data-explorer/announcing-azure-data-explorer-data-connector-for-azure-synapse/ba -p/1743868)
-- [Conecte-se ao Azure Data Explorer usando o Apache Spark para Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer)
+- [Anunciando o conector de dados do Azure Data Explorer para o Azure Synapse](https://techcommunity.microsoft.com/t5/azure-data-explorer/announcing-azure-data-explorer-data-connector-for-azure-synapse/ba-p/1743868)
+- - [Conecte-se ao Azure Data Explorer usando o Apache Spark para Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer)
 - [Metadados compartilhados do Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/metadata/overview)
 - [Introdução dos utilitários do Microsoft Spark](https://docs.microsoft.com/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python)
 - [Hyperspace - Um subsistema de indexação de código aberto que traz aceleração de consulta baseada em índice para Apache Spark™ e cargas de trabalho de big data](https://github.com/microsoft/hyperspace)
