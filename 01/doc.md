@@ -182,11 +182,11 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
 12. Agora adicione outra nova célula ao seu notebook com o seguinte código (observe a linha extra no início usada para habilitar a otimização do hiperespaço no mecanismo Spark):
 
     ``` python
-    # Habilitar o hiperespaço - as regras de otimização do hiperespaço se tornam visíveis para o otimizador do Spark e exploram os índices do hiperespaço existentes    para otimizar as consultas do usuário
-    Hyperspace.enable(faísca)
-    df1 = dfSales.filter("""CustomerId = 200""").select("""TotalAmount""")
-    df1.show()
-    df1.explain(True)
+        # Enable Hyperspace - Hyperspace optimization rules become visible to the Spark optimizer and exploit existing Hyperspace indexes to optimize user queries
+        Hyperspace.enable(spark)
+        df1 = dfSales.filter("""CustomerId = 200""").select("""TotalAmount""")
+        df1.show()
+        df1.explain(True)
     ```
 
 13. Execute a nova célula. A saída mostrará que o plano de execução física agora está usando o índice em vez do arquivo de dados original.
