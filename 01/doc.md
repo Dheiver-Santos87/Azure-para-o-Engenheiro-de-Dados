@@ -41,7 +41,7 @@ Antes de percorrer os exercícios deste laboratório, verifique se você tem ace
 
 #### Tarefa 2: Preencha o seguinte Notbook
 
-Abra o bloco de anotações **1-Delta-Architecture**. Certifique-se de anexar seu notebook antes de seguir as instruções e executar as células dele.
+Abra o bloco de anotações **11-Delta-Architecture**. Certifique-se de anexar seu notebook antes de seguir as instruções e executar as células dele.
 
 No notebook, você explorará um lote de streaming e processamento em um único pipeline.
 
