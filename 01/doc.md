@@ -8,9 +8,9 @@ Neste módulo, o aluno será capaz de:
 - Organize o data lake em níveis de transformação de arquivos
 - Indexar armazenamento de data lake para aceleração de consulta e carga de trabalho
 
-## Laboratório 1 - Arquitetura do Delta Lake
+## Laboratório 1 - Arquitetura do Data Lake
 
-Neste laboratório, você usará um espaço de trabalho do Azure Databricks e executará o streaming estruturado com trabalhos em lote usando o Delta Lake. Você precisa concluir os exercícios em um Databricks Notebook. Para começar, você precisa ter acesso a um espaço de trabalho do Azure Databricks. Se você não tiver um espaço de trabalho disponível, siga as instruções abaixo. Caso contrário, você pode pular para o final da página para [Clone the Databricks archive](#clone-the-databricks-archive).
+Neste laboratório, você usará um espaço de trabalho do Azure Databricks e executará o streaming estruturado com trabalhos em lote usando o Data Lake. Você precisa concluir os exercícios em um Databricks Notebook. Para começar, você precisa ter acesso a um espaço de trabalho do Azure Databricks. Se você não tiver um espaço de trabalho disponível, siga as instruções abaixo. Caso contrário, você pode pular para o final da página para [Clone the Databricks archive](#clone-the-databricks-archive).
 
 ### Antes do laboratório prático
 
