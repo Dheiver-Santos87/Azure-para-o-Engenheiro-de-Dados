@@ -220,13 +220,13 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
     Caso você queira desativar o Hyperspace e limpar os índices, você pode executar o seguinte código:
 
     ``` python
-    # Desabilitar hiperespaço - As regras de hiperespaço não se aplicam mais durante a otimização da consulta. Desabilitar o hiperespaço não tem impacto nos índices criados porque eles permanecem intactos
-    Hyperspace.disable(faísca)
+       # Disable Hyperspace - Hyperspace rules no longer apply during query optimization. Disabling Hyperspace has no impact on created indexes because they remain    intact
+       Hyperspace.disable(spark)
 
-    hyperspace.deleteIndex("indexSALES")
-    hyperspace.vacuumIndex("indexSALES")
-    hyperspace.deleteIndex("indexCUSTOMERS")
-    hyperspace.vacuumIndex("indexCUSTOMERS")
+       hyperspace.deleteIndex("indexSALES")
+       hyperspace.vacuumIndex("indexSALES")
+       hyperspace.deleteIndex("indexCUSTOMERS")
+       hyperspace.vacuumIndex("indexCUSTOMERS")
     ```
 
 #### Tarefa 2: Explore o armazenamento do Data Lake com a biblioteca MSSparkUtil
