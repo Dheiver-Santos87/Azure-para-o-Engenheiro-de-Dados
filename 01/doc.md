@@ -1,31 +1,31 @@
-# Module 1 - Explore compute and storage options for data engineering workloads
+# Módulo 1 - Explore as opções de computação e armazenamento para cargas de trabalho de engenharia de dados
 
-This module teaches ways to structure the data lake, and to optimize the files for exploration, streaming, and batch workloads. The student will learn how to organize the data lake into levels of data refinement as they transform files through batch and stream processing. Then they will learn how to create indexes on their datasets, such as CSV, JSON, and Parquet files, and use them for potential query and workload acceleration.
+Este módulo ensina maneiras de estruturar o data lake e otimizar os arquivos para exploração, streaming e cargas de trabalho em lote. O aluno aprenderá a organizar o data lake em níveis de refinamento de dados à medida que transforma arquivos por meio de processamento em lote e fluxo. Em seguida, eles aprenderão a criar índices em seus conjuntos de dados, como arquivos CSV, JSON e Parquet, e usá-los para uma possível consulta e aceleração de carga de trabalho.
 
-In this module, the student will be able to:
+Neste módulo, o aluno será capaz de:
 
-- Combine streaming and batch processing with a single pipeline
-- Organize the data lake into levels of file transformation
-- Index data lake storage for query and workload acceleration
+- Combine streaming e processamento em lote com um único pipeline
+- Organize o data lake em níveis de transformação de arquivos
+- Indexar armazenamento de data lake para aceleração de consulta e carga de trabalho
 
 ## Lab details
 
-- [Module 1 - Explore compute and storage options for data engineering workloads](#module-1---explore-compute-and-storage-options-for-data-engineering-workloads)
-  - [Lab details](#lab-details)
-  - [Lab 1 - Delta Lake architecture](#lab-1---delta-lake-architecture)
-    - [Before the hands-on lab](#before-the-hands-on-lab)
-      - [Task 1: Create and configure the Azure Databricks workspace](#task-1-create-and-configure-the-azure-databricks-workspace)
-    - [Exercise 1: Complete the lab notebook](#exercise-1-complete-the-lab-notebook)
-      - [Task 1: Clone the Databricks archive](#task-1-clone-the-databricks-archive)
-      - [Task 2: Complete the following notebook](#task-2-complete-the-following-notebook)
+- [Módulo 1 - Explorar opções de computação e armazenamento para cargas de trabalho de engenharia de dados](#module-1---explore-compute-and-storage-options-for-data-engineering-workloads)
+  - [Detalhes do laboratório](#lab-details)
+  - [Lab 1 - Arquitetura Delta Lake](#lab-1---delta-lake-architecture)
+    - [Antes do laboratório prático](#antes do laboratório prático)
+      - [Tarefa 1: criar e configurar o espaço de trabalho Azure Databricks](#task-1-create-and-configure-the-azure-databricks-workspace)
+    - [Exercício 1: Complete o caderno de laboratório](#exercise-1-complete-the-lab-notebook)
+      - [Tarefa 1: clonar o arquivo Databricks](#task-1-clone-the-databricks-archive)
+      - [Tarefa 2: Complete o seguinte caderno](#task-2-complete-the-following-notebook)
   - [Lab 2 - Working with Apache Spark in Synapse Analytics](#lab-2---working-with-apache-spark-in-synapse-analytics)
-    - [Before the hands-on lab](#before-the-hands-on-lab-1)
-      - [Task 1: Create and configure the Azure Synapse Analytics workspace](#task-1-create-and-configure-the-azure-synapse-analytics-workspace)
-      - [Task 2: Create and configure additional resources for this lab](#task-2-create-and-configure-additional-resources-for-this-lab)
-    - [Exercise 1: Load and data with Spark](#exercise-1-load-and-data-with-spark)
-      - [Task 1: Index the Data Lake storage with Hyperspace](#task-1-index-the-data-lake-storage-with-hyperspace)
-      - [Task 2: Explore the Data Lake storage with the MSSparkUtil library](#task-2-explore-the-data-lake-storage-with-the-mssparkutil-library)
-    - [Resources](#resources)
+    - [Antes do laboratório prático](#antes do laboratório prático-1)
+      - [Tarefa 1: criar e configurar o espaço de trabalho do Azure Synapse Analytics](#task-1-create-and-configure-the-azure-synapse-analytics-workspace)
+      - [Tarefa 2: criar e configurar recursos adicionais para este laboratório](#task-2-create-and-configure-additional-resources-for-this-lab)
+    - [Exercício 1: Carregar e dados com Spark](#exercise-1-load-and-data-with-spark)
+      - [Tarefa 1: indexar o armazenamento do Data Lake com hiperespaço](#task-1-index-the-data-lake-storage-with-hyperspace)
+      - [Tarefa 2: explore o armazenamento do Data Lake com a biblioteca MSSparkUtil](#task-2-explore-the-data-lake-storage-with-the-mssparkutil-library)
+    - [Recursos](#recursos)
 
 ## Lab 1 - Delta Lake architecture
 
