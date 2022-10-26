@@ -231,38 +231,38 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
 
 #### Tarefa 2: Explore o armazenamento do Data Lake com a biblioteca MSSparkUtil
 
-O Microsoft Spark Utilities (MSSparkUtils) é um pacote interno para ajudá-lo a executar tarefas comuns com facilidade. Você pode usar o MSSparkUtils para trabalhar com sistemas de arquivos, obter variáveis ​​de ambiente e trabalhar com segredos.
+O Microsoft Spark Utilities (MSSparkUtils) é um pacote interno para ajudá-lo a executar tarefas comuns com facilidade. Você pode usar o MSSparkUtils para trabalhar com sistemas de arquivos, obter variáveis de ambiente e trabalhar com segredos.
 
 1. Continue com o mesmo notebook da tarefa anterior e adicione uma nova célula com o seguinte código:
 
-    ``` python
-from notebookutils import mssparkutils
+    ```python
+    from notebookutils import mssparkutils
 
-#
-# Microsoft Spark Utilities
-#
-# https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
-#
+    #
+    # Microsoft Spark Utilities
+    #
+    # https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
+    #
 
-# Azure storage access info
-blob_account_name = datalake
-blob_container_name = 'wwi-02'
-blob_relative_path = '/'
-linkedServiceName = datalake
-blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
+    # Azure storage access info
+    blob_account_name = datalake
+    blob_container_name = 'wwi-02'
+    blob_relative_path = '/'
+    linkedServiceName = datalake
+    blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
 
-# Allow SPARK to access from Blob remotely
-spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
+    # Allow SPARK to access from Blob remotely
+    spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
 
-files = mssparkutils.fs.ls('/')
-for file in files:
-    print(file.name, file.isDir, file.isFile, file.path, file.size)
+    files = mssparkutils.fs.ls('/')
+    for file in files:
+        print(file.name, file.isDir, file.isFile, file.path, file.size)
 
-mssparkutils.fs.mkdirs('/SomeNewFolder')
+    mssparkutils.fs.mkdirs('/SomeNewFolder')
 
-files = mssparkutils.fs.ls('/')
-for file in files:
-    print(file.name, file.isDir, file.isFile, file.path, file.size)
+    files = mssparkutils.fs.ls('/')
+    for file in files:
+        print(file.name, file.isDir, file.isFile, file.path, file.size)
     ```
 
 2. Execute a nova célula e observe como o `mssparkutils` é usado para trabalhar com o sistema de arquivos.
@@ -277,3 +277,4 @@ Para saber mais sobre os tópicos abordados neste laboratório, use estes recurs
 - [Metadados compartilhados do Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/metadata/overview)
 - [Introdução dos utilitários do Microsoft Spark](https://docs.microsoft.com/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python)
 - [Hyperspace - Um subsistema de indexação de código aberto que traz aceleração de consulta baseada em índice para Apache Spark™ e cargas de trabalho de big data](https://github.com/microsoft/hyperspace)
+
