@@ -22,7 +22,7 @@ Antes de percorrer os exercícios deste laboratório, verifique se você tem ace
 
 **Se você não estiver usando um ambiente de laboratório hospedado**, siga as [lab 01 setup instructions](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/01/lab-01-setup.md) para criar e configurar manualmente a área de trabalho.
 
-### Exercício 1: Preencha o caderno de laboratório
+### Exercício 1: Preencha o Notebook
 
 #### Tarefa 1: Clone o arquivo Databricks
 
@@ -33,76 +33,116 @@ Antes de percorrer os exercícios deste laboratório, verifique se você tem ace
 ![A opção de menu para importar o arquivo](imagens/import-archive.png)
 
 1. Na caixa de diálogo **Import Notebooks**, selecione o URL e cole o seguinte URL:
-
  ```
   https://github.com/solliancenet/microsoft-learning-paths-databricks-notebooks/blob/master/data-engineering/DBC/11-Delta-Lake-Architecture.dbc?raw=true
  ```
-2. Select **Import**.
-3. Select the **11-Delta-Lake-Architecture** folder that appears.
+2. Selecione **Importar**.
+3. Selecione a pasta **11-Delta-Lake-Architecture** que aparece.
 
-#### Task 2: Complete the following notebook
+#### Tarefa 2: Preencha o seguinte Notbook
 
-Open the **1-Delta-Architecture** notebook. Make sure you attach your cluster to the notebook before following the instructions and running the cells within.
+Abra o bloco de anotações **1-Delta-Architecture**. Certifique-se de anexar seu notebook antes de seguir as instruções e executar as células dele.
 
-Within the notebook, you will explore combining streaming and batch processing with a single pipeline.
+No notebook, você explorará um lote de streaming e processamento em um único pipeline.
 
-> After you've completed the notebook, return to this screen, and continue to the next lab.
+> Depois de aprofundar o notebook, a esta tela e continuar para o laboratório.
 
-## Lab 2 - Working with Apache Spark in Synapse Analytics
+## Laboratório 2 - Trabalhando com Apache Spark no Synapse Analytics
 
-This lab demonstrates the experience of working with Apache Spark in Azure Synapse Analytics. You will learn how to connect an Azure Synapse Analytics workspace to an Azure Data Explorer workspace using a Linked Service and then load data from one of its databases using a Spark notebook. You will also learn how to use libraries like Hyperspace and MSSparkUtil to optimize the experience of working with Data Lake storage accounts from Spark notebooks. In addition to Data Explorer and Data Lake storage, the data enrichment process will also use historical data from a SQL Pool. In the end, you will learn how to publish the enriched data back into the Data Lake and consume it with the SQL Built-in Pool and Power BI.
+Este laboratório demonstra a experiência de trabalhar com o Apache Spark no Azure Synapse Analytics. Você aprenderá como conectar um espaço de trabalho do Azure Synapse Analytics a um espaço de trabalho do Azure Data Explorer usando um serviço vinculado e carregar dados de um de seus bancos de dados usando um notebook Spark. Você também aprenderá a usar bibliotecas como Hyperspace e MSSparkUtil para otimizar a experiência de trabalhar com contas de armazenamento Data Lake de notebooks Spark. Além do armazenamento do Data Explorer e do Data Lake, o processo de enriquecimento de dados também usará dados históricos de um SQL Pool. No final, você aprenderá a publicar os dados enriquecidos de volta no Data Lake e consumi-los com o SQL Built-in Pool e o Power BI.
 
-After completing the lab, you will understand the main steps of an end-to-end data enrichment process that uses Spark in an Azure Synapse Analytics workspace.
+Depois de concluir o laboratório, você entenderá as principais etapas de um processo de enriquecimento de dados de ponta a ponta que usa o Spark em um espaço de trabalho do Azure Synapse Analytics.
 
-### Before the hands-on lab
+### Antes do laboratório prático
 
-> **Note:** Only complete the `Before the hands-on lab` steps if you are **not** using a hosted lab environment, and are instead using your own Azure subscription. Otherwise, skip ahead to Exercise 1.
+> **Observação:** conclua apenas as etapas "Antes do laboratório prático" se você **não** estiver usando um ambiente de laboratório hospedado e estiver usando sua própria assinatura do Azure. Caso contrário, pule para o Exercício 1.
 
-Before stepping through the exercises in this lab, make sure you have properly configured your Azure Synapse Analytics workspace. Perform the tasks below to configure the workspace.
+Antes de percorrer os exercícios deste laboratório, verifique se você configurou corretamente seu espaço de trabalho do Azure Synapse Analytics. Execute as tarefas abaixo para configurar o espaço de trabalho.
 
-#### Task 1: Create and configure the Azure Synapse Analytics workspace
+#### Tarefa 1: Criar e configurar o espaço de trabalho do Azure Synapse Analytics
 
->**NOTE**
+>**NOTA**
 >
->If you have already created and configured the Synapse Analytics workspace while running one of the other labs available in this repo, you must not perform this task again and you can move on to the next task. The labs are designed to share the Synapse Analytics workspace, so you only need to create it once.
+>Se você já criou e configurou o espaço de trabalho do Synapse Analytics enquanto executa um dos outros laboratórios disponíveis neste repositório, você não deve executar esta tarefa novamente e pode passar para a próxima tarefa. Os laboratórios são projetados para compartilhar o espaço de trabalho do Synapse Analytics, portanto, você só precisa criá-lo uma vez.
 
-**If you are not using a hosted lab environment**, follow the instructions in [Deploy your Azure Synapse Analytics workspace](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/01/asa-workspace-deploy.md) to create and configure the workspace.
+**Se você não estiver usando um ambiente de laboratório hospedado**, siga as instruções em [Implantar seu espaço de trabalho do Azure Synapse Analytics](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/01/asa-workspace-deploy.md) para criar e configurar a área de trabalho.
 
-#### Task 2: Create and configure additional resources for this lab
+#### Tarefa 2: criar e configurar recursos adicionais para este laboratório
 
-**If you are not using a hosted lab environment**, follow the instructions in [Deploy resources for Lab 02](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/01/lab-02-deploy.md) to deploy additional resources for this lab. Once deployment is complete, you are ready to proceed with the exercises in this lab.
+**Se você não estiver usando um ambiente de laboratório hospedado**, siga as instruções em [Implantar recursos para o Laboratório 02](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/ setup/01/lab-02-deploy.md) para implantar recursos adicionais para este laboratório. Quando a implantação for concluída, você estará pronto para continuar com os exercícios deste laboratório.
 
-### Exercise 1: Load and data with Spark
+### Exercício 1: Carregar e dados com o Spark
 
-#### Task 1: Index the Data Lake storage with Hyperspace
+#### Tarefa 1: indexar o armazenamento do Data Lake com hiperespaço
 
-When loading data from Azure Data Lake Gen 2, searching in the data is one of the most resource consuming operations. [Hyperspace](https://github.com/microsoft/hyperspace) introduces the ability for Apache Spark users to create indexes on their datasets, such as CSV, JSON, and Parquet, and use them for potential query and workload acceleration.
+Ao carregar dados do Azure Data Lake Gen 2, a pesquisa nos dados é uma das operações que mais consomem recursos. [Hyperspace](https://github.com/microsoft/hyperspace) apresenta a capacidade dos usuários do Apache Spark de criar índices em seus conjuntos de dados, como CSV, JSON e Parquet, e usá-los para uma possível consulta e aceleração de carga de trabalho.
 
-Hyperspace lets you create indexes on records scanned from persisted data files. After they're successfully created, an entry that corresponds to the index is added to the Hyperspace's metadata. This metadata is later used by Apache Spark's optimizer during query processing to find and use proper indexes. If the underlying data changes, you can refresh an existing index to capture that.
+O hiperespaço permite criar índices em registros verificados de arquivos de dados persistentes. Após serem criados com sucesso, uma entrada que corresponde ao índice é adicionada aos metadados do hiperespaço. Esses metadados são usados ​​posteriormente pelo otimizador do Apache Spark durante o processamento de consultas para localizar e usar índices adequados. Se os dados subjacentes forem alterados, você poderá atualizar um índice existente para capturar isso.
 
-Also, Hyperspace allows users to compare their original plan versus the updated index-dependent plan before running their query.
+Além disso, o Hyperspace permite que os usuários comparem seu plano original com o plano dependente de índice atualizado antes de executar sua consulta.
 
-1. Open Synapse Studio (<https://web.azuresynapse.net/>).
+1. Abra o Synapse Studio (<https://web.azuresynapse.net/>).
 
-2. Select the **Develop** hub.
+2. Selecione o hub **Desenvolver**.
 
-    ![The develop hub is highlighted.](imagens/develop-hub.png "Develop hub")
+    ![O hub de desenvolvimento está destacado.](imagens/develop-hub.png "Hub de desenvolvimento")
 
-3. Select **+**, then **Notebook** to create a new Synapse notebook.
+3. Selecione ***+** e, em seguida, **Notebook** para criar um novo notebook Synapse.
 
-    ![The new notebook menu item is highlighted.](imagens/new-notebook.png "New Notebook")
+    ![O novo item de menu do notebook é destacado.](imagens/new-notebook.png "New Notebook")
 
-4. Enter **Hyperspace** for the notebook name **(1)**, then select the **Properties** button above **(2)** to hide the properties pane.
+4. Digite **Hyperspace** para o nome do bloco de anotações **(1)** e selecione o botão **Propriedades** acima de **(2)** para ocultar o painel de propriedades.
 
-    ![The notebook properties are displayed.](imagens/notebook-properties.png "Properties")
+    ![As propriedades do notebook são exibidas.](imagens/notebook-properties.png "Propriedades")
 
-5. Attach the notebook to the Spark cluster and make sure that the language is set to **PySpark (Python)**.
+5. Anexe o notebook ao cluster Spark e certifique-se de que o idioma esteja definido como **PySpark (Python)**.
 
-    ![The cluster is selected and the language is set.](imagens/notebook-attach-cluster.png "Attach cluster")
+    ![O cluster é selecionado e o idioma é definido.](imagens/notebook-attach-cluster.png "Attach cluster")
 
-6. Add the following code to a new cell in your notebook:
+6. Adicione o seguinte código a uma nova célula em seu notebook:
 
-    ```python
+    ``` python
+    da importação do hiperespaço *
+    da importação com.microsoft.hyperspace *
+    de com.microsoft.hyperspace.index importação *
+
+    # Desabilite o BroadcastHashJoin, para que o Spark use o SortMergeJoin padrão. Atualmente, os índices de hiperespaço utilizam SortMergeJoin para acelerar a consulta.
+    spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+
+    # Substitua o valor abaixo pelo nome da sua conta principal do ADLS Gen2 para o seu espaço de trabalho Synapse
+    datalake = 'REPLACE_WITH_YOUR_DATALAKE_NAME'
+
+    dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/* .parquet")
+    dfSales.show(10)
+
+    dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", cabeçalho = Verdadeiro)
+    dfCustomers.show(10)
+
+    # Cria uma instância do Hyperspace
+    hiperespaço = hiperespaço(faísca)
+    ```
+
+    Substitua o valor `REPLACE_WITH_YOUR_DATALAKE_NAME` pelo nome da sua conta principal do ADLS Gen2 para o seu espaço de trabalho Synapse. Para encontrar isso, faça o seguinte:
+
+    1. Navegue até o hub **Dados**.
+
+        ![O hub de dados está destacado.](imagens/data-hub.png "Hub de dados")
+
+    2. Selecione a guia **Linked** **(1)**, expanda o grupo Azure Data Lake Storage Gen2 e anote o nome ADLS Gen2 primário **(2)** ao lado do nome do workspace .
+
+        ![O nome principal do ADLS Gen2 é exibido.](imagens/adlsgen2-name.png "Nome do ADLS Gen2")
+
+7. Execute a nova célula. Ele carregará os dois DataFrames com dados do data lake e inicializará o Hyperspace.
+
+    ![Carregar dados do data lake e inicializar o hiperespaço](imagens/lab-02-ex-02-task-02-initialize-hyperspace.png "Initialize Hyperspace")
+
+    > **Observação**: Você pode selecionar o botão Executar à esquerda da célula ou digitar `Shift+Enter` para executar a célula e criar uma nova célula abaixo.
+    >
+    > A primeira vez que você executar uma célula no notebook levará alguns minutos, pois deve iniciar um novo cluster Spark. Cada execução de célula subsequente deve ser mais rápida.
+
+8. Adicione uma nova célula de código ao seu notebook com o seguinte código:
+
+    ``` python
     from hyperspace import *  
     from com.microsoft.hyperspace import *
     from com.microsoft.hyperspace.index import *
@@ -121,98 +161,67 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
     # Create an instance of Hyperspace
     hyperspace = Hyperspace(spark)
+
     ```
 
-    Replace the `REPLACE_WITH_YOUR_DATALAKE_NAME` value with the name of your primary ADLS Gen2 account for your Synapse workspace. To find this, do the following:
+9. Execute a nova célula. Ele criará dois índices e exibirá sua estrutura.
 
-    1. Navigate to the **Data** hub.
+    ![Crie novos índices e exiba sua estrutura](imagens/lab-02-ex-02-task-02-create-indexes.png "Novos índices")
 
-        ![The data hub is highlighted.](imagens/data-hub.png "Data hub")
+10. Adicione outra nova célula de código ao seu notebook com o seguinte código:
 
-    2. Select the **Linked** tab **(1)**, expand the Azure Data Lake Storage Gen2 group, then make note of the primary ADLS Gen2 name **(2)** next to the name of the workspace.
-
-        ![The primary ADLS Gen2 name is displayed.](imagens/adlsgen2-name.png "ADLS Gen2 name")
-
-7. Run the new cell. It will load the two DataFrames with data from the data lake and initialize Hyperspace.
-
-    ![Load data from the data lake and initialize Hyperspace](imagens/lab-02-ex-02-task-02-initialize-hyperspace.png "Initialize Hyperspace")
-
-    > **Note**: You may select the Run button to the left of the cell, or enter `Shift+Enter` to execute the cell and create a new cell below.
-    >
-    > The first time you execute a cell in the notebook will take a few minutes since it must start a new Spark cluster. Each subsequent cell execution should be must faster.
-
-8. Add a new code cell to your notebook with the following code:
-
-    ```python
-    #create indexes: each one contains a name, a set of indexed columns and a set of included columns
-    indexConfigSales = IndexConfig("indexSALES", ["CustomerId"], ["TotalAmount"])
-    indexConfigCustomers = IndexConfig("indexCUSTOMERS", ["CustomerId"], ["FullName"])
-
-    hyperspace.createIndex(dfSales, indexConfigSales)			# only create index once
-    hyperspace.createIndex(dfCustomers, indexConfigCustomers)	# only create index once
-    hyperspace.indexes().show()
-    ```
-
-9. Run the new cell. It will create two indexes and display their structure.
-
-    ![Create new indexes and display their structure](imagens/lab-02-ex-02-task-02-create-indexes.png "New indexes")
-
-10. Add another new code cell to your notebook with the following code:
-
-    ```python
+    ``` python
     df1 = dfSales.filter("""CustomerId = 200""").select("""TotalAmount""")
     df1.show()
     df1.explain(True)
     ```
 
-11. Run the new cell. The output will show that the physical execution plan is not taking into account any of the indexes (performs a file scan on the original data file).
-
+11. Execute a nova célula. A saída mostrará que o plano de execução física não está levando em consideração nenhum dos índices (realiza uma verificação de arquivo no arquivo de dados original).
     ![Hyperspace explained - no indexes used](imagens/lab-02-ex-02-task-02-explain-hyperspace-01.png)
 
-12. Now add another new cell to your notebook with the following code (notice the extra line at the beginning used to enable Hyperspace optimization in the Spark engine):
+12. Agora adicione outra nova célula ao seu notebook com o seguinte código (observe a linha extra no início usada para habilitar a otimização do hiperespaço no mecanismo Spark):
 
-    ```python
-    # Enable Hyperspace - Hyperspace optimization rules become visible to the Spark optimizer and exploit existing Hyperspace indexes to optimize user queries
-    Hyperspace.enable(spark)
+    ``` python
+    # Habilitar o hiperespaço - as regras de otimização do hiperespaço se tornam visíveis para o otimizador do Spark e exploram os índices do hiperespaço existentes para otimizar as consultas do usuário
+    Hyperspace.enable(faísca)
     df1 = dfSales.filter("""CustomerId = 200""").select("""TotalAmount""")
     df1.show()
     df1.explain(True)
     ```
 
-13. Run the new cell. The output will show that the physical execution plan is now using the index instead of the original data file.
+13. Execute a nova célula. A saída mostrará que o plano de execução física agora está usando o índice em vez do arquivo de dados original.
 
-    ![Hyperspace explained - using an index](imagens/lab-02-ex-02-task-02-explain-hyperspace-02.png)
+    ![Hyperspace explicado - usando um índice](imagens/lab-02-ex-02-task-02-explain-hyperspace-02.png)
 
-14. Hyperspace provides an Explain API that allows you to compare the execution plans without indexes vs. with indexes. Add a new cell with the following code:
+14. O Hyperspace fornece uma API Explain que permite comparar os planos de execução sem índices versus com índices. Adicione uma nova célula com o seguinte código:
 
-    ```python
+    ``` python
     df1 = dfSales.filter("""CustomerId = 200""").select("""TotalAmount""")
 
     spark.conf.set("spark.hyperspace.explain.displayMode", "html")
     hyperspace.explain(df1, True, displayHTML)
     ```
 
-15. Run the new cell. The output shows a comparison `Plan with indexes` vs. `Plan without indexes`. Observe how, in the first case the index file is used while in the second case the original data file is used.
+15. Execute a nova célula. A saída mostra uma comparação `Plano com índices` vs. `Plano sem índices`. Observe como, no primeiro caso, o arquivo de índice é usado enquanto no segundo caso o arquivo de dados original é usado.
 
-    ![Hyperspace explained - plan comparison](imagens/lab-02-ex-02-task-02-explain-hyperspace-03.png)
+    ![Hyperspace explicado - comparação de planos](imagens/lab-02-ex-02-task-02-explain-hyperspace-03.png)
 
-16. Let's investigate now a more complex case, involving a join operation. Add a new cell with the following code:
+16. Vamos investigar agora um caso mais complexo, envolvendo uma operação de junção. Adicione uma nova célula com o seguinte código:
 
-    ```python
+    ``` python
     eqJoin = dfSales.join(dfCustomers, dfSales.CustomerId == dfCustomers.CustomerId).select(dfSales.TotalAmount, dfCustomers.FullName)
 
     hyperspace.explain(eqJoin, True, displayHTML)
     ```
+17. Execute a nova célula. A saída mostra novamente uma comparação `Plano com índices` vs. `Plano sem índices`, onde os índices são usados ​​no primeiro caso e os arquivos de dados originais no segundo.
 
-17. Run the new cell. The output shows again a comparison `Plan with indexes` vs. `Plan without indexes`, where indexes are used in the first case and the original data files in the second.
+    ![Hyperspace Explained - Plan Comparation for Join](imagens/lab-02-ex-02-task-02-explain-hyperspace-04.png)
 
-    ![Hyperspace explained - plan comparison for join](imagens/lab-02-ex-02-task-02-explain-hyperspace-04.png)
+    Caso você queira desativar o Hyperspace e limpar os índices, você pode executar o seguinte código:
 
-    In case you want to deactivate Hyperspace and cleanup the indexes, you can run the following code:
-
-    ```python
-    # Disable Hyperspace - Hyperspace rules no longer apply during query optimization. Disabling Hyperspace has no impact on created indexes because they remain intact
-    Hyperspace.disable(spark)
+    ``` python
+    # Desabilitar hiperespaço - As regras de hiperespaço não se aplicam mais durante a otimização da consulta. Desabilitar o hiperespaço não tem impacto nos índices criados porque eles permanecem intactos
+    Hyperspace.disable(faísca)
 
     hyperspace.deleteIndex("indexSALES")
     hyperspace.vacuumIndex("indexSALES")
@@ -220,53 +229,51 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
     hyperspace.vacuumIndex("indexCUSTOMERS")
     ```
 
-#### Task 2: Explore the Data Lake storage with the MSSparkUtil library
+#### Tarefa 2: Explore o armazenamento do Data Lake com a biblioteca MSSparkUtil
 
-Microsoft Spark Utilities (MSSparkUtils) is a builtin package to help you easily perform common tasks. You can use MSSparkUtils to work with file systems, to get environment variables, and to work with secrets.
+O Microsoft Spark Utilities (MSSparkUtils) é um pacote interno para ajudá-lo a executar tarefas comuns com facilidade. Você pode usar o MSSparkUtils para trabalhar com sistemas de arquivos, obter variáveis ​​de ambiente e trabalhar com segredos.
 
-1. Continue with the same notebook from the previous task and add a new cell with the following code:
+1. Continue com o mesmo notebook da tarefa anterior e adicione uma nova célula com o seguinte código:
 
-    ```python
-    from notebookutils import mssparkutils
+    ``` python
+    de notebookutils importar mssparkutils
 
     #
-    # Microsoft Spark Utilities
+    # Utilitários do Microsoft Spark
     #
     # https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
     #
 
-    # Azure storage access info
+    # Informações de acesso ao armazenamento do Azure
     blob_account_name = datalake
     blob_container_name = 'wwi-02'
     blob_relative_path = '/'
     linkedServiceName = datalake
     blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
 
-    # Allow SPARK to access from Blob remotely
+    # Permitir que o SPARK acesse remotamente do Blob
     spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
 
-    files = mssparkutils.fs.ls('/')
-    for file in files:
+    arquivos = mssparkutils.fs.ls('/')
+    para arquivo em arquivos:
         print(file.name, file.isDir, file.isFile, file.path, file.size)
 
     mssparkutils.fs.mkdirs('/SomeNewFolder')
 
-    files = mssparkutils.fs.ls('/')
-    for file in files:
+    arquivos = mssparkutils.fs.ls('/')
+    para arquivo em arquivos:
         print(file.name, file.isDir, file.isFile, file.path, file.size)
     ```
 
-2. Run the new cell and observe how `mssparkutils` is used to work with the file system.
+2. Execute a nova célula e observe como o `mssparkutils` é usado para trabalhar com o sistema de arquivos.
 
-### Resources
+### Recursos
 
-To learn more about the topics covered in this lab, use these resources:
+Para saber mais sobre os tópicos abordados neste laboratório, use estes recursos:
 
-- [Apache Spark in Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-overview)
-- [Announcing Azure Data Explorer data connector for Azure Synapse](https://techcommunity.microsoft.com/t5/azure-data-explorer/announcing-azure-data-explorer-data-connector-for-azure-synapse/ba-p/1743868)
-- [Connect to Azure Data Explorer using Apache Spark for Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer)
-- [Azure Synapse Analytics shared metadata](https://docs.microsoft.com/azure/synapse-analytics/metadata/overview)
-- [Introduction of Microsoft Spark Utilities](https://docs.microsoft.com/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python)
-- [Hyperspace - An open source indexing subsystem that brings index-based query acceleration to Apache Spark™ and big data workloads](https://github.com/microsoft/hyperspace)
-
-
+- [Apache Spark no Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/spark/apache-spark-overview)
+- [Anunciando o conector de dados do Azure Data Explorer para o Azure Synapse](https://techcommunity.microsoft.com/t5/azure-data-explorer/announcing-azure-data-explorer-data-connector-for-azure-synapse/ba -p/1743868)
+- [Conecte-se ao Azure Data Explorer usando o Apache Spark para Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer)
+- [Metadados compartilhados do Azure Synapse Analytics](https://docs.microsoft.com/azure/synapse-analytics/metadata/overview)
+- [Introdução dos utilitários do Microsoft Spark](https://docs.microsoft.com/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python)
+- [Hyperspace - Um subsistema de indexação de código aberto que traz aceleração de consulta baseada em índice para Apache Spark™ e cargas de trabalho de big data](https://github.com/microsoft/hyperspace)
