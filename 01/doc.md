@@ -236,33 +236,33 @@ O Microsoft Spark Utilities (MSSparkUtils) é um pacote interno para ajudá-lo a
 1. Continue com o mesmo notebook da tarefa anterior e adicione uma nova célula com o seguinte código:
 
     ``` python
-  from notebookutils import mssparkutils
+from notebookutils import mssparkutils
 
-   #
-   # Microsoft Spark Utilities
-   #
-   # https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
-   #
+#
+# Microsoft Spark Utilities
+#
+# https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/microsoft-spark-utilities?pivots=programming-language-python
+#
 
-   # Azure storage access info
-   blob_account_name = datalake
-   blob_container_name = 'wwi-02'
-   blob_relative_path = '/'
-   linkedServiceName = datalake
-   blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
+# Azure storage access info
+blob_account_name = datalake
+blob_container_name = 'wwi-02'
+blob_relative_path = '/'
+linkedServiceName = datalake
+blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linkedServiceName)
 
-   # Allow SPARK to access from Blob remotely
-   spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
+# Allow SPARK to access from Blob remotely
+spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)
 
-   files = mssparkutils.fs.ls('/')
-   for file in files:
-       print(file.name, file.isDir, file.isFile, file.path, file.size)
+files = mssparkutils.fs.ls('/')
+for file in files:
+    print(file.name, file.isDir, file.isFile, file.path, file.size)
 
-   mssparkutils.fs.mkdirs('/SomeNewFolder')
+mssparkutils.fs.mkdirs('/SomeNewFolder')
 
-   files = mssparkutils.fs.ls('/')
-   for file in files:
-       print(file.name, file.isDir, file.isFile, file.path, file.size)
+files = mssparkutils.fs.ls('/')
+for file in files:
+    print(file.name, file.isDir, file.isFile, file.path, file.size)
     ```
 
 2. Execute a nova célula e observe como o `mssparkutils` é usado para trabalhar com o sistema de arquivos.
