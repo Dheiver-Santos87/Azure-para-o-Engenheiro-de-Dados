@@ -8,57 +8,37 @@ Neste módulo, o aluno será capaz de:
 - Organize o data lake em níveis de transformação de arquivos
 - Indexar armazenamento de data lake para aceleração de consulta e carga de trabalho
 
-## Lab details
+## Laboratório 1 - Arquitetura do Delta Lake
 
-- [Módulo 1 - Explorar opções de computação e armazenamento para cargas de trabalho de engenharia de dados](#module-1---explore-compute-and-storage-options-for-data-engineering-workloads)
-  - [Detalhes do laboratório](#lab-details)
-  - [Lab 1 - Arquitetura Delta Lake](#lab-1---delta-lake-architecture)
-    - [Antes do laboratório prático](#antes do laboratório prático)
-      - [Tarefa 1: criar e configurar o espaço de trabalho Azure Databricks](#task-1-create-and-configure-the-azure-databricks-workspace)
-    - [Exercício 1: Complete o caderno de laboratório](#exercise-1-complete-the-lab-notebook)
-      - [Tarefa 1: clonar o arquivo Databricks](#task-1-clone-the-databricks-archive)
-      - [Tarefa 2: Complete o seguinte caderno](#task-2-complete-the-following-notebook)
-  - [Lab 2 - Working with Apache Spark in Synapse Analytics](#lab-2---working-with-apache-spark-in-synapse-analytics)
-    - [Antes do laboratório prático](#antes do laboratório prático-1)
-      - [Tarefa 1: criar e configurar o espaço de trabalho do Azure Synapse Analytics](#task-1-create-and-configure-the-azure-synapse-analytics-workspace)
-      - [Tarefa 2: criar e configurar recursos adicionais para este laboratório](#task-2-create-and-configure-additional-resources-for-this-lab)
-    - [Exercício 1: Carregar e dados com Spark](#exercise-1-load-and-data-with-spark)
-      - [Tarefa 1: indexar o armazenamento do Data Lake com hiperespaço](#task-1-index-the-data-lake-storage-with-hyperspace)
-      - [Tarefa 2: explore o armazenamento do Data Lake com a biblioteca MSSparkUtil](#task-2-explore-the-data-lake-storage-with-the-mssparkutil-library)
-    - [Recursos](#recursos)
+Neste laboratório, você usará um espaço de trabalho do Azure Databricks e executará o streaming estruturado com trabalhos em lote usando o Delta Lake. Você precisa concluir os exercícios em um Databricks Notebook. Para começar, você precisa ter acesso a um espaço de trabalho do Azure Databricks. Se você não tiver um espaço de trabalho disponível, siga as instruções abaixo. Caso contrário, você pode pular para o final da página para [Clone the Databricks archive](#clone-the-databricks-archive).
 
-## Lab 1 - Delta Lake architecture
+### Antes do laboratório prático
 
-In this lab, you will use an Azure Databricks workspace and perform Structured Streaming with batch jobs by using Delta Lake. You need to complete the exercises within a Databricks Notebook. To begin, you need to have access to an Azure Databricks workspace. If you do not have a workspace available, follow the instructions below. Otherwise, you can skip to the bottom of the page to [Clone the Databricks archive](#clone-the-databricks-archive).
+> **Observação:** conclua apenas as etapas "Antes do laboratório prático" se você **não** estiver usando um ambiente de laboratório hospedado e estiver usando sua própria assinatura do Azure. Caso contrário, pule para o Exercício 1.
 
-### Before the hands-on lab
+Antes de percorrer os exercícios deste laboratório, verifique se você tem acesso a um espaço de trabalho do Azure Databricks com um cluster disponível. Execute as tarefas abaixo para configurar o espaço de trabalho.
 
-> **Note:** Only complete the `Before the hands-on lab` steps if you are **not** using a hosted lab environment, and are instead using your own Azure subscription. Otherwise, skip ahead to Exercise 1.
+#### Tarefa 1: Criar e configurar o espaço de trabalho Azure Databricks
 
-Before stepping through the exercises in this lab, make sure you have access to an Azure Databricks workspace with an available cluster. Perform the tasks below to configure the workspace.
+**Se você não estiver usando um ambiente de laboratório hospedado**, siga as [lab 01 setup instructions](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/01/lab-01-setup.md) para criar e configurar manualmente a área de trabalho.
 
-#### Task 1: Create and configure the Azure Databricks workspace
+### Exercício 1: Preencha o caderno de laboratório
 
-**If you are not using a hosted lab environment**, follow the [lab 01 setup instructions](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/01/lab-01-setup.md) to manually create and configure the workspace.
+#### Tarefa 1: Clone o arquivo Databricks
 
-### Exercise 1: Complete the lab notebook
+1. Se você não tiver o espaço de trabalho do Azure Databricks aberto no momento: no portal do Azure, navegue até o espaço de trabalho do Azure Databricks implantado e selecione **Launch Workspace**.
+2. No painel esquerdo, selecione **Workspace** > **Users** e selecione seu nome de usuário (a entrada com o ícone de casa).
+3. No painel exibido, selecione a seta ao lado do seu nome e selecione **Importar**.
 
-#### Task 1: Clone the Databricks archive
+![A opção de menu para importar o arquivo](imagens/import-archive.png)
 
-1. If you do not currently have your Azure Databricks workspace open: in the Azure portal, navigate to your deployed Azure Databricks workspace and select **Launch Workspace**.
-1. In the left pane, select **Workspace** > **Users**, and select your username (the entry with the house icon).
-1. In the pane that appears, select the arrow next to your name, and select **Import**.
-
-  ![The menu option to import the archive](imagens/import-archive.png)
-
-1. In the **Import Notebooks** dialog box, select the URL and paste in the following URL:
+1. Na caixa de diálogo **Import Notebooks**, selecione o URL e cole o seguinte URL:
 
  ```
   https://github.com/solliancenet/microsoft-learning-paths-databricks-notebooks/blob/master/data-engineering/DBC/11-Delta-Lake-Architecture.dbc?raw=true
  ```
-
-1. Select **Import**.
-1. Select the **11-Delta-Lake-Architecture** folder that appears.
+2. Select **Import**.
+3. Select the **11-Delta-Lake-Architecture** folder that appears.
 
 #### Task 2: Complete the following notebook
 
