@@ -102,24 +102,24 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
 6. Adicione o seguinte código a uma nova célula em seu notebook:
 
     ``` python
-    da importação do hiperespaço *
-    da importação com.microsoft.hyperspace *
-    de com.microsoft.hyperspace.index importação *
+        from hyperspace import *  
+        from com.microsoft.hyperspace import *
+        from com.microsoft.hyperspace.index import *
 
-    # Desabilite o BroadcastHashJoin, para que o Spark use o SortMergeJoin padrão. Atualmente, os índices de hiperespaço utilizam SortMergeJoin para acelerar a consulta.
-    spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+        # Disable BroadcastHashJoin, so Spark will use standard SortMergeJoin. Currently, Hyperspace indexes utilize SortMergeJoin to speed up query.
+        spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
-    # Substitua o valor abaixo pelo nome da sua conta principal do ADLS Gen2 para o seu espaço de trabalho Synapse
-    datalake = 'REPLACE_WITH_YOUR_DATALAKE_NAME'
+        # Replace the value below with the name of your primary ADLS Gen2 account for your Synapse workspace
+        datalake = 'REPLACE_WITH_YOUR_DATALAKE_NAME'
 
-    dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/* .parquet")
-    dfSales.show(10)
+        dfSales = spark.read.parquet("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/sale-small/Year=2019/Quarter=Q4/Month=12/*/*.parquet")
+        dfSales.show(10)
 
-    dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", cabeçalho = Verdadeiro)
-    dfCustomers.show(10)
+        dfCustomers = spark.read.load("abfss://wwi-02@" + datalake + ".dfs.core.windows.net/data-generators/generator-customer-clean.csv", format="csv", header=True)
+        dfCustomers.show(10)
 
-    # Cria uma instância do Hyperspace
-    hiperespaço = hiperespaço(faísca)
+        # Create an instance of Hyperspace
+        hyperspace = Hyperspace(spark)
     ```
 
     Substitua o valor `REPLACE_WITH_YOUR_DATALAKE_NAME` pelo nome da sua conta principal do ADLS Gen2 para o seu espaço de trabalho Synapse. Para encontrar isso, faça o seguinte:
@@ -182,7 +182,7 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
 12. Agora adicione outra nova célula ao seu notebook com o seguinte código (observe a linha extra no início usada para habilitar a otimização do hiperespaço no mecanismo Spark):
 
     ``` python
-    # Habilitar o hiperespaço - as regras de otimização do hiperespaço se tornam visíveis para o otimizador do Spark e exploram os índices do hiperespaço existentes para otimizar as consultas do usuário
+    # Habilitar o hiperespaço - as regras de otimização do hiperespaço se tornam visíveis para o otimizador do Spark e exploram os índices do hiperespaço existentes    para otimizar as consultas do usuário
     Hyperspace.enable(faísca)
     df1 = dfSales.filter("""CustomerId = 200""").select("""TotalAmount""")
     df1.show()
