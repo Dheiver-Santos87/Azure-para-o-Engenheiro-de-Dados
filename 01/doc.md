@@ -106,19 +106,19 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 2. Select the **Develop** hub.
 
-    ![The develop hub is highlighted.](media/develop-hub.png "Develop hub")
+    ![The develop hub is highlighted.](imagens/develop-hub.png "Develop hub")
 
 3. Select **+**, then **Notebook** to create a new Synapse notebook.
 
-    ![The new notebook menu item is highlighted.](media/new-notebook.png "New Notebook")
+    ![The new notebook menu item is highlighted.](imagens/new-notebook.png "New Notebook")
 
 4. Enter **Hyperspace** for the notebook name **(1)**, then select the **Properties** button above **(2)** to hide the properties pane.
 
-    ![The notebook properties are displayed.](media/notebook-properties.png "Properties")
+    ![The notebook properties are displayed.](imagens/notebook-properties.png "Properties")
 
 5. Attach the notebook to the Spark cluster and make sure that the language is set to **PySpark (Python)**.
 
-    ![The cluster is selected and the language is set.](media/notebook-attach-cluster.png "Attach cluster")
+    ![The cluster is selected and the language is set.](imagens/notebook-attach-cluster.png "Attach cluster")
 
 6. Add the following code to a new cell in your notebook:
 
@@ -147,15 +147,15 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
     1. Navigate to the **Data** hub.
 
-        ![The data hub is highlighted.](media/data-hub.png "Data hub")
+        ![The data hub is highlighted.](imagens/data-hub.png "Data hub")
 
     2. Select the **Linked** tab **(1)**, expand the Azure Data Lake Storage Gen2 group, then make note of the primary ADLS Gen2 name **(2)** next to the name of the workspace.
 
-        ![The primary ADLS Gen2 name is displayed.](media/adlsgen2-name.png "ADLS Gen2 name")
+        ![The primary ADLS Gen2 name is displayed.](imagens/adlsgen2-name.png "ADLS Gen2 name")
 
 7. Run the new cell. It will load the two DataFrames with data from the data lake and initialize Hyperspace.
 
-    ![Load data from the data lake and initialize Hyperspace](media/lab-02-ex-02-task-02-initialize-hyperspace.png "Initialize Hyperspace")
+    ![Load data from the data lake and initialize Hyperspace](imagens/lab-02-ex-02-task-02-initialize-hyperspace.png "Initialize Hyperspace")
 
     > **Note**: You may select the Run button to the left of the cell, or enter `Shift+Enter` to execute the cell and create a new cell below.
     >
@@ -175,7 +175,7 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 9. Run the new cell. It will create two indexes and display their structure.
 
-    ![Create new indexes and display their structure](media/lab-02-ex-02-task-02-create-indexes.png "New indexes")
+    ![Create new indexes and display their structure](imagens/lab-02-ex-02-task-02-create-indexes.png "New indexes")
 
 10. Add another new code cell to your notebook with the following code:
 
@@ -187,7 +187,7 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 11. Run the new cell. The output will show that the physical execution plan is not taking into account any of the indexes (performs a file scan on the original data file).
 
-    ![Hyperspace explained - no indexes used](media/lab-02-ex-02-task-02-explain-hyperspace-01.png)
+    ![Hyperspace explained - no indexes used](imagens/lab-02-ex-02-task-02-explain-hyperspace-01.png)
 
 12. Now add another new cell to your notebook with the following code (notice the extra line at the beginning used to enable Hyperspace optimization in the Spark engine):
 
@@ -201,7 +201,7 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 13. Run the new cell. The output will show that the physical execution plan is now using the index instead of the original data file.
 
-    ![Hyperspace explained - using an index](media/lab-02-ex-02-task-02-explain-hyperspace-02.png)
+    ![Hyperspace explained - using an index](imagens/lab-02-ex-02-task-02-explain-hyperspace-02.png)
 
 14. Hyperspace provides an Explain API that allows you to compare the execution plans without indexes vs. with indexes. Add a new cell with the following code:
 
@@ -214,7 +214,7 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 15. Run the new cell. The output shows a comparison `Plan with indexes` vs. `Plan without indexes`. Observe how, in the first case the index file is used while in the second case the original data file is used.
 
-    ![Hyperspace explained - plan comparison](media/lab-02-ex-02-task-02-explain-hyperspace-03.png)
+    ![Hyperspace explained - plan comparison](imagens/lab-02-ex-02-task-02-explain-hyperspace-03.png)
 
 16. Let's investigate now a more complex case, involving a join operation. Add a new cell with the following code:
 
@@ -226,7 +226,7 @@ Also, Hyperspace allows users to compare their original plan versus the updated 
 
 17. Run the new cell. The output shows again a comparison `Plan with indexes` vs. `Plan without indexes`, where indexes are used in the first case and the original data files in the second.
 
-    ![Hyperspace explained - plan comparison for join](media/lab-02-ex-02-task-02-explain-hyperspace-04.png)
+    ![Hyperspace explained - plan comparison for join](imagens/lab-02-ex-02-task-02-explain-hyperspace-04.png)
 
     In case you want to deactivate Hyperspace and cleanup the indexes, you can run the following code:
 
