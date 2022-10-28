@@ -73,11 +73,11 @@ Antes de percorrer os exercícios deste laboratório, verifique se você configu
 
 ### Exercício 1: Carregar e dados com o Spark
 
-#### Tarefa 1: indexar o armazenamento do Data Lake com hiperespaço
+#### Tarefa 1: indexar o armazenamento do Data Lake com hyperspace
 
 Ao carregar dados do Azure Data Lake Gen 2, a pesquisa nos dados é uma das operações que mais consomem recursos. [Hyperspace](https://github.com/microsoft/hyperspace) apresenta a capacidade dos usuários do Apache Spark de criar índices em seus conjuntos de dados, como CSV, JSON e Parquet, e usá-los para uma possível consulta e aceleração de carga de trabalho.
 
-O hiperespaço permite criar índices em registros verificados de arquivos de dados persistentes. Após serem criados com sucesso, uma entrada que corresponde ao índice é adicionada aos metadados do hiperespaço. Esses metadados são usados ​​posteriormente pelo otimizador do Apache Spark durante o processamento de consultas para localizar e usar índices adequados. Se os dados subjacentes forem alterados, você poderá atualizar um índice existente para capturar isso.
+O hyperspace permite criar índices em registros verificados de arquivos de dados persistentes. Após serem criados com sucesso, uma entrada que corresponde ao índice é adicionada aos metadados do hyperspace. Esses metadados são usados ​​posteriormente pelo otimizador do Apache Spark durante o processamento de consultas para localizar e usar índices adequados. Se os dados subjacentes forem alterados, você poderá atualizar um índice existente para capturar isso.
 
 Além disso, o Hyperspace permite que os usuários comparem seu plano original com o plano dependente de índice atualizado antes de executar sua consulta.
 
@@ -134,7 +134,7 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
 
 7. Execute a nova célula. Ele carregará os dois DataFrames com dados do data lake e inicializará o Hyperspace.
 
-    ![Carregar dados do data lake e inicializar o hiperespaço](imagens/lab-02-ex-02-task-02-initialize-hyperspace.png "Initialize Hyperspace")
+    ![Carregar dados do data lake e inicializar o hyperspace](imagens/lab-02-ex-02-task-02-initialize-hyperspace.png "Initialize Hyperspace")
 
     > **Observação**: Você pode selecionar o botão Executar à esquerda da célula ou digitar `Shift+Enter` para executar a célula e criar uma nova célula abaixo.
     >
@@ -179,7 +179,7 @@ Além disso, o Hyperspace permite que os usuários comparem seu plano original c
 11. Execute a nova célula. A saída mostrará que o plano de execução física não está levando em consideração nenhum dos índices (realiza uma verificação de arquivo no arquivo de dados original).
     ![Hyperspace explained - no indexes used](imagens/lab-02-ex-02-task-02-explain-hyperspace-01.png)
 
-12. Agora adicione outra nova célula ao seu notebook com o seguinte código (observe a linha extra no início usada para habilitar a otimização do hiperespaço no mecanismo Spark):
+12. Agora adicione outra nova célula ao seu notebook com o seguinte código (observe a linha extra no início usada para habilitar a otimização do hyperspace no mecanismo Spark):
 
     ``` python
         # Enable Hyperspace - Hyperspace optimization rules become visible to the Spark optimizer and exploit existing Hyperspace indexes to optimize user queries
