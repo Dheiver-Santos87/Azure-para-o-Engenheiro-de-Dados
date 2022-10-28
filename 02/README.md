@@ -54,15 +54,15 @@ This lab uses the dedicated SQL pool. As a first step, make sure it is not pause
 
 2. Select the **Manage** hub.
 
-    ![The manage hub is highlighted.](media/manage-hub.png "Manage hub")
+    ![The manage hub is highlighted.](imagens/manage-hub.png "Manage hub")
 
 3. Select **SQL pools** in the left-hand menu **(1)**. If the dedicated SQL pool is paused, hover over the name of the pool and select **Resume (2)**.
 
-    ![The resume button is highlighted on the dedicated SQL pool.](media/resume-dedicated-sql-pool.png "Resume")
+    ![The resume button is highlighted on the dedicated SQL pool.](imagens/resume-dedicated-sql-pool.png "Resume")
 
 4. When prompted, select **Resume**. It will take a minute or two to resume the pool.
 
-    ![The resume button is highlighted.](media/resume-dedicated-sql-pool-confirm.png "Resume")
+    ![The resume button is highlighted.](imagens/resume-dedicated-sql-pool-confirm.png "Resume")
 
 > **Continue to the next exercise** while the dedicated SQL pool resumes.
 
@@ -80,7 +80,7 @@ Generally, dimension tables contain a relatively small number of rows. Fact tabl
 
 Below is an example star schema, where the fact table is in the middle, surrounded by dimension tables:
 
-![Example star schema.](media/star-schema.png "Star schema")
+![Example star schema.](imagens/star-schema.png "Star schema")
 
 ### Task 1: Create star schema in SQL database
 
@@ -90,17 +90,17 @@ In this task, you create a star schema in SQL database, using foreign key constr
 
 2. Open the resource group for this lab, then select the **SourceDB** SQL database.
 
-    ![The SourceDB database is highlighted.](media/rg-sourcedb.png "SourceDB SQL database")
+    ![The SourceDB database is highlighted.](imagens/rg-sourcedb.png "SourceDB SQL database")
 
 3. Copy the **Server name** value on the Overview pane.
 
-    ![The SourceDB server name value is highlighted.](media/sourcedb-server-name.png "Server name")
+    ![The SourceDB server name value is highlighted.](imagens/sourcedb-server-name.png "Server name")
 
 4. Open Azure Data Studio.
 
 5. Select **Servers** on the left-hand menu, then click **Add Connection**.
 
-    ![The add connection button is highlighted in Azure Data Studio.](media/ads-add-connection-button.png "Add Connection")
+    ![The add connection button is highlighted in Azure Data Studio.](imagens/ads-add-connection-button.png "Add Connection")
 
 6. In the Connection Details form, provide the following information:
 
@@ -111,13 +111,13 @@ In this task, you create a star schema in SQL database, using foreign key constr
     - **Remember password**: Checked.
     - **Database**: Select `SourceDB`.
 
-    ![The connection details are completed as described.](media/ads-add-connection.png "Connection Details")
+    ![The connection details are completed as described.](imagens/ads-add-connection.png "Connection Details")
 
 7. Select **Connect**.
 
 8. Select **Servers** in the left-hand menu, then right-click the SQL server you added at the beginning of the lab. Select **New Query**.
 
-    ![The New Query link is highlighted.](media/ads-new-query.png "New Query")
+    ![The New Query link is highlighted.](imagens/ads-new-query.png "New Query")
 
 9. Paste the following into the query window to create the dimension and fact tables:
 
