@@ -1,125 +1,125 @@
-# Module 2 - Design and Implement the serving layer
+# Módulo 2 - Projetar e Implementar a camada de serviço
 
-This module teaches how to design and implement data stores in a modern data warehouse to optimize analytical workloads. The student will learn how to design a multidimensional schema to store fact and dimension data. Then the student will learn how to populate slowly changing dimensions through incremental data loading from Azure Data Factory.
+Este módulo ensina como projetar e implementar armazenamentos de dados em um data warehouse moderno para otimizar cargas de trabalho analíticas. O aluno aprenderá como projetar um esquema multidimensional para armazenar dados de fato e dimensão. Em seguida, o aluno aprenderá a preencher dimensões de alteração lenta por meio do carregamento de dados incremental do Azure Data Factory.
 
-In this module, the student will be able to:
+Neste módulo, o aluno será capaz de:
 
-- Design a star schema for analytical workloads (OLAP)
-- Populate slowly changing dimensions with Azure Data Factory and mapping data flows
+- Projete um esquema em estrela para cargas de trabalho analíticas (OLAP)
+- Preencha as dimensões de alteração lenta com o Azure Data Factory e mapeamento de fluxos de dados
 
-## Lab details
+## Detalhes do laboratório
 
-- [Module 2 - Design and Implement the serving layer](#module-2---design-and-implement-the-serving-layer)
-  - [Lab details](#lab-details)
-    - [Lab setup and pre-requisites](#lab-setup-and-pre-requisites)
-  - [Exercise 0: Start the dedicated SQL pool](#exercise-0-start-the-dedicated-sql-pool)
-  - [Exercise 1: Implementing a Star Schema](#exercise-1-implementing-a-star-schema)
-    - [Task 1: Create star schema in SQL database](#task-1-create-star-schema-in-sql-database)
-  - [Exercise 2: Implementing a Snowflake Schema](#exercise-2-implementing-a-snowflake-schema)
-    - [Task 1: Create product snowflake schema in SQL database](#task-1-create-product-snowflake-schema-in-sql-database)
-    - [Task 2: Create reseller snowflake schema in SQL database](#task-2-create-reseller-snowflake-schema-in-sql-database)
-  - [Exercise 3: Implementing a Time Dimension Table](#exercise-3-implementing-a-time-dimension-table)
-    - [Task 1: Create time dimension table](#task-1-create-time-dimension-table)
-    - [Task 2: Populate the time dimension table](#task-2-populate-the-time-dimension-table)
-    - [Task 3: Load data into other tables](#task-3-load-data-into-other-tables)
-    - [Task 4: Query data](#task-4-query-data)
-  - [Exercise 4: Implementing a Star Schema in Synapse Analytics](#exercise-4-implementing-a-star-schema-in-synapse-analytics)
-    - [Task 1: Create star schema in Synapse dedicated SQL](#task-1-create-star-schema-in-synapse-dedicated-sql)
-    - [Task 2: Load data into Synapse tables](#task-2-load-data-into-synapse-tables)
-    - [Task 3: Query data from Synapse](#task-3-query-data-from-synapse)
-  - [Exercise 5: Updating slowly changing dimensions with mapping data flows](#exercise-5-updating-slowly-changing-dimensions-with-mapping-data-flows)
-    - [Task 1: Create the Azure SQL Database linked service](#task-1-create-the-azure-sql-database-linked-service)
-    - [Task 2: Create a mapping data flow](#task-2-create-a-mapping-data-flow)
-    - [Task 3: Create a pipeline and run the data flow](#task-3-create-a-pipeline-and-run-the-data-flow)
-    - [Task 4: View inserted data](#task-4-view-inserted-data)
-    - [Task 5: Update a source customer record](#task-5-update-a-source-customer-record)
-    - [Task 6: Re-run mapping data flow](#task-6-re-run-mapping-data-flow)
-    - [Task 7: Verify record updated](#task-7-verify-record-updated)
-  - [Exercise 6: Cleanup](#exercise-6-cleanup)
-    - [Task 1: Pause the dedicated SQL pool](#task-1-pause-the-dedicated-sql-pool)
+- [Módulo 2 - Projetar e implementar a camada de veiculação](#module-2---design-and-implement-the-serving-layer)
+  - [Detalhes do laboratório](#lab-details)
+    - [Configuração e pré-requisitos do laboratório](#lab-setup-and-pre-requisites)
+  - [Exercício 0: Iniciar o pool SQL dedicado](#exercise-0-start-the-dedicated-sql-pool)
+  - [Exercício 1: Implementando um esquema em estrela](#exercise-1-implementing-a-star-schema)
+    - [Tarefa 1: Criar esquema em estrela no banco de dados SQL](#task-1-create-star-schema-in-sql-database)
+  - [Exercício 2: Implementando um esquema de floco de neve](#exercise-2-implementing-a-snowflake-schema)
+    - [Tarefa 1: Criar esquema de floco de neve do produto no banco de dados SQL](#task-1-create-product-snowflake-schema-in-sql-database)
+    - [Tarefa 2: Criar esquema de floco de neve de revendedor no banco de dados SQL](#task-2-create-reseller-snowflake-schema-in-sql-database)
+  - [Exercício 3: Implementando uma Tabela de Dimensão de Tempo](#exercise-3-implementing-a-time-dimension-table)
+    - [Tarefa 1: criar tabela de dimensão de tempo](#task-1-create-time-dimension-table)
+    - [Tarefa 2: preencher a tabela de dimensão de tempo](#task-2-populate-the-time-dimension-table)
+    - [Tarefa 3: Carregar dados em outras tabelas](#task-3-load-data-into-other-tables)
+    - [Tarefa 4: dados de consulta](#task-4-query-data)
+  - [Exercício 4: Implementando um esquema em estrela no Synapse Analytics](#exercise-4-implementing-a-star-schema-in-synapse-analytics)
+    - [Tarefa 1: Criar esquema em estrela no SQL dedicado do Synapse](#task-1-create-star-schema-in-synapse-dedicated-sql)
+    - [Tarefa 2: Carregar dados em tabelas Synapse](#task-2-load-data-into-synapse-tables)
+    - [Tarefa 3: consultar dados do Synapse](#task-3-query-data-from-synapse)
+  - [Exercício 5: Atualizando dimensões de alteração lenta com fluxos de dados de mapeamento](#exercise-5-updating-slowly-change-dimensions-with-mapping-data-flows)
+    - [Tarefa 1: Criar o serviço vinculado do Banco de Dados SQL do Azure](#task-1-create-the-azure-sql-database-linked-service)
+    - [Tarefa 2: crie um fluxo de dados de mapeamento](#task-2-create-a-mapping-data-flow)
+    - [Tarefa 3: crie um pipeline e execute o fluxo de dados](#task-3-create-a-pipeline-and-run-the-data-flow)
+    - [Tarefa 4: Ver dados inseridos](#task-4-view-inserted-data)
+    - [Tarefa 5: atualizar um registro de cliente de origem](#task-5-update-a-source-customer-record)
+    - [Tarefa 6: execute novamente o fluxo de dados de mapeamento](#task-6-re-run-mapping-data-flow)
+    - [Tarefa 7: Verificar registro atualizado](#task-7-verify-record-updated)
+  - [Exercício 6: Limpeza](#exercise-6-cleanup)
+    - [Tarefa 1: Pausar o pool SQL dedicado](#task-1-pause-the-dedicated-sql-pool)
 
-### Lab setup and pre-requisites
+### Configuração e pré-requisitos do laboratório
 
-> **Note:** Only complete the `Lab setup and pre-requisites` steps if you are **not** using a hosted lab environment, and are instead using your own Azure subscription. Otherwise, skip ahead to Exercise 0.
+> **Observação:** conclua apenas as etapas de "Configuração e pré-requisitos do laboratório" se você **não** estiver usando um ambiente de laboratório hospedado e estiver usando sua própria assinatura do Azure. Caso contrário, pule para o Exercício 0.
 
-1. If you have not already, follow the [lab setup instructions](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/02/README.md) for this module.
+1. Se ainda não o fez, siga as [instruções de configuração do laboratório](https://github.com/solliancenet/microsoft-data-engineering-ilt-deploy/blob/main/setup/02/README.md) para este módulo.
 
-2. Install [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15) on your computer or lab virtual machine.
+2. Instale o [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15) em seu computador ou máquina virtual de laboratório .
 
-## Exercise 0: Start the dedicated SQL pool
+## Exercício 0: Inicie o pool SQL dedicado
 
-This lab uses the dedicated SQL pool. As a first step, make sure it is not paused. If so, start it by following these instructions:
+Este laboratório usa o pool SQL dedicado. Como primeiro passo, certifique-se de que não está em pausa. Em caso afirmativo, inicie-o seguindo estas instruções:
 
-1. Open Synapse Studio (<https://web.azuresynapse.net/>).
+1. Abra o Synapse Studio (<https://web.azuresynapse.net/>).
 
-2. Select the **Manage** hub.
+2. Selecione o hub **Gerenciar**.
 
-    ![The manage hub is highlighted.](media/manage-hub.png "Manage hub")
+     ![O hub de gerenciamento é destacado.](media/manage-hub.png "Gerenciar hub")
 
-3. Select **SQL pools** in the left-hand menu **(1)**. If the dedicated SQL pool is paused, hover over the name of the pool and select **Resume (2)**.
+3. Selecione **pools SQL** no menu à esquerda **(1)**. Se o pool SQL dedicado estiver pausado, passe o mouse sobre o nome do pool e selecione **Resume (2)**.
 
-    ![The resume button is highlighted on the dedicated SQL pool.](media/resume-dedicated-sql-pool.png "Resume")
+     ![O botão continuar é destacado no pool SQL dedicado.](media/resume-dedicated-sql-pool.png "Resume")
 
-4. When prompted, select **Resume**. It will take a minute or two to resume the pool.
+4. Quando solicitado, selecione **Retomar**. Levará um minuto ou dois para retomar a piscina.
 
-    ![The resume button is highlighted.](media/resume-dedicated-sql-pool-confirm.png "Resume")
+     ![O botão continuar é destacado.](media/resume-dedicated-sql-pool-confirm.png "Resume")
 
-> **Continue to the next exercise** while the dedicated SQL pool resumes.
+> **Continue para o próximo exercício** enquanto o pool de SQL dedicado é retomado.
 
-## Exercise 1: Implementing a Star Schema
+## Exercício 1: Implementando um esquema em estrela
 
-Star schema is a mature modeling approach widely adopted by relational data warehouses. It requires modelers to classify their model tables as either dimension or fact.
+O esquema em estrela é uma abordagem de modelagem madura amplamente adotada por data warehouses relacionais. Requer que os modeladores classifiquem suas tabelas de modelo como dimensão ou fato.
 
-**Dimension tables** describe business entities—the things you model. Entities can include products, people, places, and concepts including time itself. The most consistent table you'll find in a star schema is a date dimension table. A dimension table contains a key column (or columns) that acts as a unique identifier, and descriptive columns.
+**Tabelas de dimensão** descrevem entidades comerciais, as coisas que você modela. As entidades podem incluir produtos, pessoas, lugares e conceitos, incluindo o próprio tempo. A tabela mais consistente que você encontrará em um esquema em estrela é uma tabela de dimensão de data. Uma tabela de dimensões contém uma coluna-chave (ou colunas) que atua como um identificador exclusivo e colunas descritivas.
 
-Dimension tables contain attribute data that might change but usually changes infrequently. For example, a customer's name and address are stored in a dimension table and updated only when the customer's profile changes. To minimize the size of a large fact table, the customer's name and address don't need to be in every row of a fact table. Instead, the fact table and the dimension table can share a customer ID. A query can join the two tables to associate a customer's profile and transactions.
+As tabelas de dimensões contêm dados de atributos que podem ser alterados, mas geralmente são alterados com pouca frequência. Por exemplo, o nome e o endereço de um cliente são armazenados em uma tabela de dimensões e atualizados somente quando o perfil do cliente é alterado. Para minimizar o tamanho de uma grande tabela de fatos, o nome e o endereço do cliente não precisam estar em todas as linhas de uma tabela de fatos. Em vez disso, a tabela de fatos e a tabela de dimensões podem compartilhar um ID de cliente. Uma consulta pode unir as duas tabelas para associar o perfil e as transações de um cliente.
 
-**Fact tables** store observations or events, and can be sales orders, stock balances, exchange rates, temperatures, etc. A fact table contains dimension key columns that relate to dimension tables, and numeric measure columns. The dimension key columns determine the dimensionality of a fact table, while the dimension key values determine the granularity of a fact table. For example, consider a fact table designed to store sale targets that has two dimension key columns `Date` and `ProductKey`. It's easy to understand that the table has two dimensions. The granularity, however, can't be determined without considering the dimension key values. In this example, consider that the values stored in the Date column are the first day of each month. In this case, the granularity is at month-product level.
+**Tabelas de fatos** armazenam observações ou eventos e podem ser pedidos de venda, saldos de estoque, taxas de câmbio, temperaturas etc. Uma tabela de fatos contém colunas de chave de dimensão relacionadas a tabelas de dimensão e colunas de medida numérica. As colunas de chave de dimensão determinam a dimensionalidade de uma tabela de fatos, enquanto os valores de chave de dimensão determinam a granularidade de uma tabela de fatos. Por exemplo, considere uma tabela de fatos projetada para armazenar metas de venda que tenha duas colunas de chave de dimensão `Date` e `ProductKey`. É fácil entender que a mesa tem duas dimensões. A granularidade, no entanto, não pode ser determinada sem considerar os valores da chave de dimensão. Neste exemplo, considere que os valores armazenados na coluna Data são o primeiro dia de cada mês. Nesse caso, a granularidade está no nível do produto do mês.
 
-Generally, dimension tables contain a relatively small number of rows. Fact tables, on the other hand, can contain a very large number of rows and continue to grow over time.
+Geralmente, as tabelas de dimensão contêm um número relativamente pequeno de linhas. As tabelas de fatos, por outro lado, podem conter um número muito grande de linhas e continuar a crescer ao longo do tempo.
 
-Below is an example star schema, where the fact table is in the middle, surrounded by dimension tables:
+Abaixo está um exemplo de esquema em estrela, onde a tabela de fatos está no meio, cercada por tabelas de dimensões:
 
-![Example star schema.](media/star-schema.png "Star schema")
+![Exemplo de esquema em estrela.](media/star-schema.png "Esquema em estrela")
 
-### Task 1: Create star schema in SQL database
+### Tarefa 1: Criar esquema em estrela no banco de dados SQL
 
-In this task, you create a star schema in SQL database, using foreign key constraints. The first step is to create the base dimension and fact tables.
+Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando restrições de chave estrangeira. A primeira etapa é criar a dimensão base e as tabelas de fatos.
 
-1. Sign in to the Azure portal (<https://portal.azure.com>).
+1. Entre no portal do Azure (<https://portal.azure.com>).
 
-2. Open the resource group for this lab, then select the **SourceDB** SQL database.
+2. Abra o grupo de recursos para este laboratório e selecione o banco de dados SQL **SourceDB**.
 
-    ![The SourceDB database is highlighted.](media/rg-sourcedb.png "SourceDB SQL database")
+    ![O banco de dados SourceDB é destacado.](media/rg-sourcedb.png "Banco de dados SQL SourceDB")
 
-3. Copy the **Server name** value on the Overview pane.
+3. Copie o valor **Nome do servidor** no painel Visão geral.
 
-    ![The SourceDB server name value is highlighted.](media/sourcedb-server-name.png "Server name")
+    ![O valor do nome do servidor SourceDB é destacado.](media/sourcedb-server-name.png "Nome do servidor")
 
-4. Open Azure Data Studio.
+4. Abra o Azure Data Studio.
 
-5. Select **Servers** on the left-hand menu, then click **Add Connection**.
+5. Selecione **Servers** no menu à esquerda e clique em **Add Connection**.
 
-    ![The add connection button is highlighted in Azure Data Studio.](media/ads-add-connection-button.png "Add Connection")
+    ![O botão adicionar conexão é destacado no Azure Data Studio.](media/ads-add-connection-button.png "Add Connection")
 
-6. In the Connection Details form, provide the following information:
+6. No formulário Detalhes da conexão, forneça as seguintes informações:
 
-    - **Server**: Paste the SourceDB server name value here.
-    - **Authentication type**: Select `SQL Login`.
-    - **User name**: Enter `sqladmin`.
-    - **Password**: Enter the password you supplied when deploying the lab environment, or which was provided to you as part of your hosted lab environment.
-    - **Remember password**: Checked.
-    - **Database**: Select `SourceDB`.
+    - **Server**: Cole o valor do nome do servidor SourceDB aqui.
+    - **Tipo de autenticação**: Selecione `Login SQL`.
+    - **Nome de usuário**: Digite `sqladmin`.
+    - **Senha**: digite a senha que você forneceu ao implantar o ambiente de laboratório ou que foi fornecida a você como parte de seu ambiente de laboratório hospedado.
+    - **Lembrar senha**: Verificado.
+    - **Banco de dados**: Selecione `SourceDB`.
 
-    ![The connection details are completed as described.](media/ads-add-connection.png "Connection Details")
+    ![Os detalhes da conexão são preenchidos conforme descrito.](media/ads-add-connection.png "Detalhes da conexão")
 
-7. Select **Connect**.
+7. Selecione **Conectar**.
 
-8. Select **Servers** in the left-hand menu, then right-click the SQL server you added at the beginning of the lab. Select **New Query**.
+8. Selecione **Servers** no menu à esquerda e clique com o botão direito do mouse no servidor SQL que você adicionou no início do laboratório. Selecione **Nova consulta**.
 
-    ![The New Query link is highlighted.](media/ads-new-query.png "New Query")
+ ![O link Nova consulta está destacado.](media/ads-new-query.png "Nova consulta")
 
-9. Paste the following into the query window to create the dimension and fact tables:
+9. Cole o seguinte na janela de consulta para criar as tabelas de dimensões e fatos:
 
     ```sql
     CREATE TABLE [dbo].[DimReseller](
