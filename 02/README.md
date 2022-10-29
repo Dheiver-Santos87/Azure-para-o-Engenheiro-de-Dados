@@ -264,7 +264,7 @@ Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando res
      No entanto, como estamos usando um banco de dados SQL, podemos adicionar relacionamentos e restrições de chave estrangeira para definir relacionamentos e impor os valores da tabela.
 
 11. Substitua **e execute** a consulta pelo seguinte para criar a chave primária e as restrições de `DimReseller`:
-12. 
+
     ```sql
     -- Create DimReseller PK
     ALTER TABLE [dbo].[DimReseller] WITH CHECK ADD 
@@ -383,7 +383,7 @@ Nesta tarefa, você adiciona duas novas tabelas de dimensão: `DimProductCategor
     GO
     ```
 
-4. Replace **and execute** the query with the following to create the `DimProductCategory` and `DimProductSubcategory` primary keys and constraints:
+4. Substitua **e execute** a consulta pelo seguinte para criar as chaves primárias e restrições `DimProductCategory` e `DimProductSubcategory`:
 
     ```sql
     -- Create DimProductCategory PK
@@ -417,7 +417,7 @@ Nesta tarefa, você adiciona duas novas tabelas de dimensão: `DimProductCategor
     GO
     ```
 
-5. Replace **and execute** the query with the following to create foreign key relationships between `DimProduct` and `DimProductSubcategory`, and `DimProductSubcategory` and `DimProductCategory`:
+5. Substitua **e execute** a consulta pelo seguinte para criar relacionamentos de chave estrangeira entre `DimProduct` e `DimProductSubcategory` e `DimProductSubcategory` e `DimProductCategory`:
 
     ```sql
     -- Create foreign key relationship between DimProduct and DimProductSubcategory
@@ -437,19 +437,19 @@ Nesta tarefa, você adiciona duas novas tabelas de dimensão: `DimProductCategor
     GO
     ```
 
-    You have created a snowflake dimension by normalizing the three product tables into a single business entity, or product dimension:
+Você criou uma dimensão de floco de neve normalizando as três tabelas de produtos em uma única entidade comercial ou dimensão de produto:
 
-    ![The three product tables are displayed.](media/snowflake-dimension-product-tables.png "Product snowflake dimension")
+![As três tabelas de produtos são exibidas.](media/snowflake-dimension-product-tables.png "Product snowflake dimension")
 
-    When we add the other tables into the diagram, we can see that the star schema is now transformed into a snowflake schema by normalizing the product tables. If you arrange the tables in a diagram, using a tool such as SQL Server Management studio, you can clearly see the relationships:
+     Quando adicionamos as outras tabelas ao diagrama, podemos ver que o esquema em estrela agora é transformado em um esquema de floco de neve normalizando as tabelas de produtos. Se você organizar as tabelas em um diagrama, usando uma ferramenta como o SQL Server Management studio, poderá ver claramente os relacionamentos:
 
-    ![The snowflake schema is shown.](media/snowflake-schema-completed.png "Snowflake schema")
+     ![O esquema de floco de neve é mostrado.](media/snowflake-schema-completed.png "Esquema de floco de neve")
 
-### Task 2: Create reseller snowflake schema in SQL database
+### Tarefa 2: Criar esquema de floco de neve de revendedor no banco de dados SQL
 
-In this task, you add two new dimension tables: `DimCustomer` and `DimGeography`. You create a relationship between these two tables and the `DimReseller` table to create a normalized reseller dimension, or snowflake dimension.
+Nesta tarefa, você adiciona duas novas tabelas de dimensão: `DimCustomer` e `DimGeography`. Você cria uma relação entre essas duas tabelas e a tabela `DimReseller` para criar uma dimensão de revendedor normalizada ou dimensão de floco de neve.
 
-1. Paste **and execute** the following into the query window to create the new dimension tables:
+1. Cole **e execute** o seguinte na janela de consulta para criar as novas tabelas de dimensão:
 
     ```sql
     CREATE TABLE [dbo].[DimCustomer](
@@ -501,7 +501,7 @@ In this task, you add two new dimension tables: `DimCustomer` and `DimGeography`
     GO
     ```
 
-2. Replace **and execute** the query with the following to create the `DimCustomer` and `DimGeography` primary keys and a unique non-clustered index on the `DimCustomer` table:
+2. Substitua **e execute** a consulta pelo seguinte para criar as chaves primárias `DimCustomer` e `DimGeography` e um índice exclusivo não clusterizado na tabela `DimCustomer`:
 
     ```sql
     -- Create DimCustomer PK
@@ -525,7 +525,7 @@ In this task, you add two new dimension tables: `DimCustomer` and `DimGeography`
     GO
     ```
 
-3. Replace **and execute** the query with the following to create foreign key relationships between `DimReseller` and `DimGeography`, and `DimGeography` and `DimCustomer`:
+3. Substitua **e execute** a consulta pelo seguinte para criar relacionamentos de chave estrangeira entre `DimReseller` e `DimGeography` e `DimGeography` e `DimCustomer`:
 
     ```sql
     -- Create foreign key relationship between DimReseller and DimGeography
@@ -546,21 +546,21 @@ In this task, you add two new dimension tables: `DimCustomer` and `DimGeography`
     GO
     ```
 
-    You now have a new snowflake dimension that normalizes reseller data with geography and customer dimensions.
+Agora você tem uma nova dimensão de floco de neve que normaliza os dados do revendedor com dimensões geográficas e de cliente.
 
-    ![The reseller snowflake dimension is displayed.](media/snowflake-dimension-reseller.png "Reseller snowflake dimension")
+     ![A dimensão do floco de neve do revendedor é exibida.](media/snowflake-dimension-reseller.png "Dimensão do floco de neve do revendedor")
 
-    Now let us look at how these new tables add another level of detail to our snowflake schema:
+     Agora vamos ver como essas novas tabelas adicionam outro nível de detalhe ao nosso esquema de floco de neve:
 
-    ![The finalized snowflake schema.](media/snowflake-schema-final.png "Snowflake schema")
+     ![O esquema de floco de neve finalizado.](media/snowflake-schema-final.png "Esquema de floco de neve")
 
-## Exercise 3: Implementing a Time Dimension Table
+## Exercício 3: Implementando uma Tabela de Dimensão Temporal
 
-A time dimension table is one of the most consistently used dimension tables. This type of table enables consistent granularity for temporal analysis and reporting and usually contains temporal hierarchies, such as `Year` > `Quarter` > `Month` > `Day`.
+Uma tabela de dimensão de tempo é uma das tabelas de dimensão mais usadas de forma consistente. Esse tipo de tabela permite granularidade consistente para análise e relatórios temporais e geralmente contém hierarquias temporais, como "Ano" > "Trimestre" > "Mês" > "Dia".
 
-Time dimension tables can contain business-specific attributes that are useful references for reporting and filters, such as fiscal periods and public holidays.
+As tabelas de dimensão de tempo podem conter atributos específicos de negócios que são referências úteis para relatórios e filtros, como períodos fiscais e feriados.
 
-This is the schema of the time dimension table that you will create:
+Este é o esquema da tabela de dimensão de tempo que você criará:
 
 | Column | Data Type |
 | --- | --- |
@@ -576,11 +576,11 @@ This is the schema of the time dimension table that you will create:
 | FiscalYear | `int` |
 | FiscalQuarter | `int` |
 
-### Task 1: Create time dimension table
+### Tarefa 1: Criar tabela de dimensão de tempo
 
-In this task, you add the time dimension table and create foreign key relationships to the `FactRetailerSales` table.
+Nesta tarefa, você adiciona a tabela de dimensão de tempo e cria relacionamentos de chave estrangeira na tabela `FactRetailerSales`.
 
-1. Paste **and execute** the following into the query window to create the new time dimension table:
+1. Cole **e execute** o seguinte na janela de consulta para criar a nova tabela de dimensão de tempo:
 
     ```sql
     CREATE TABLE DimDate
@@ -598,7 +598,7 @@ In this task, you add the time dimension table and create foreign key relationsh
     GO
     ```
 
-2. Replace **and execute** the query with the following to create the primary key and a unique non-clustered index on the `DimDate` table:
+2. Substitua **e execute** a consulta pelo seguinte para criar a chave primária e um índice exclusivo não clusterizado na tabela `DimDate`:
 
     ```sql
     -- Create DimDate PK
@@ -614,7 +614,7 @@ In this task, you add the time dimension table and create foreign key relationsh
     GO
     ```
 
-3. Replace **and execute** the query with the following to create foreign key relationships between `FactRetailerSales` and `DimDate`:
+3. Substitua **e execute** a consulta pelo seguinte para criar relacionamentos de chave estrangeira entre `FactRetailerSales` e `DimDate`:
 
     ```sql
     ALTER TABLE [dbo].[FactResellerSales] ADD
@@ -626,18 +626,17 @@ In this task, you add the time dimension table and create foreign key relationsh
                 REFERENCES [dbo].[DimDate] ([DateKey]);
     GO
     ```
+> Observe como os três campos se referem à chave primária da tabela `DimDate`.
 
-    > Notice how the three fields refer to the primary key of the `DimDate` table.
+     Agora nosso esquema de floco de neve foi atualizado para conter a tabela de dimensão de tempo:
 
-    Now our snowflake schema is updated to contain the time dimension table:
+     ![A tabela de dimensão de tempo é destacada no esquema de floco de neve.](media/snowflake-schema-time-dimension.png "Dimensão de tempo adicionada ao esquema de floco de neve")
 
-    ![The time dimension table is highlighted in the snowflake schema.](media/snowflake-schema-time-dimension.png "Time dimension added to snowflake schema")
+### Tarefa 2: Preencha a tabela de dimensão de tempo
 
-### Task 2: Populate the time dimension table
+Você pode preencher tabelas de dimensão de tempo de várias maneiras, incluindo scripts T-SQL usando funções de data/hora, funções do Microsoft Excel, importação de um arquivo simples ou geração automática por ferramentas de BI (business intelligence). Nesta tarefa, você preenche a tabela de dimensão de tempo usando T-SQL, comparando métodos de geração ao longo do caminho.
 
-You can populate time dimension tables in one of many ways, including T-SQL scripts using date/time functions, Microsoft Excel functions, importing from a flat file, or auto-generation by BI (business intelligence) tools. In this task, you populate the time dimension table using T-SQL, comparing generation methods along the way.
-
-1. Paste **and execute** the following into the query window to create the new time dimension table:
+1. Cole **e execute** o seguinte na janela de consulta para criar a nova tabela de dimensão de tempo:
 
     ```sql
     DECLARE @StartDate datetime
@@ -674,11 +673,11 @@ You can populate time dimension tables in one of many ways, including T-SQL scri
     END
     ```
 
-    > In our environment, it took about **18 seconds** to insert the generated rows.
+> Em nosso ambiente, levou cerca de **18 segundos** para inserir as linhas geradas.
 
-    This query loops from a start date of January 1, 2005 until the current date, calculating and inserting values into the table for each day.
+     Essa consulta faz um loop de uma data de início de 1º de janeiro de 2005 até a data atual, calculando e inserindo valores na tabela para cada dia.
 
-2. Replace **and execute** the query with the following to view the time dimension table data:
+2. Substitua **e execute** a consulta pelo seguinte para visualizar os dados da tabela de dimensão de tempo:
 
     ```sql
     SELECT * FROM dbo.DimDate
