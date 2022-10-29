@@ -253,18 +253,18 @@ Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando res
     GO
     ```
 
-10. Select **Run** or hit `F5` to execute the query.
+10. Selecione **Executar** ou pressione `F5` para executar a consulta.
 
-    ![The query and Run button are highlighted.](media/execute-setup-query.png "Execute query")
+     ![A consulta e o botão Executar são destacados.](media/execute-setup-query.png "Executar consulta")
 
-    Now we have three dimension tables and a fact table. Together, these tables represent a star schema:
+     Agora temos três tabelas de dimensão e uma tabela de fatos. Juntas, essas tabelas representam um esquema em estrela:
 
-    ![The four tables are displayed.](media/star-schema-no-relationships.png "Star schema: no relationships")
+     ![As quatro tabelas são exibidas.](media/star-schema-no-relationships.png "Esquema em estrela: sem relacionamentos")
 
-    However, since we are using a SQL database, we can add foreign key relationships and constraints to define relationships and enforce the table values.
+     No entanto, como estamos usando um banco de dados SQL, podemos adicionar relacionamentos e restrições de chave estrangeira para definir relacionamentos e impor os valores da tabela.
 
-11. Replace **and execute** the query with the following to create the `DimReseller` primary key and constraints:
-
+11. Substitua **e execute** a consulta pelo seguinte para criar a chave primária e as restrições de `DimReseller`:
+12. 
     ```sql
     -- Create DimReseller PK
     ALTER TABLE [dbo].[DimReseller] WITH CHECK ADD 
@@ -282,7 +282,7 @@ Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando res
     GO
     ```
 
-12. Replace **and execute** the query with the following to create the `DimEmployee` primary key:
+12. Substitua **e execute** a consulta pelo seguinte para criar a chave primária `DimEmployee`:
 
     ```sql
     -- Create DimEmployee PK
@@ -294,7 +294,7 @@ Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando res
     GO
     ```
 
-13. Replace **and execute** the query with the following to create the `DimProduct` primary key and constraints:
+13. Substitua **e execute** a consulta pelo seguinte para criar a chave primária e as restrições de `DimProduct`:
 
     ```sql
     -- Create DimProduct PK
@@ -316,7 +316,7 @@ Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando res
 
     > Now we can create the relationships between our fact and dimension tables, clearly defining the star schema.
 
-14. Replace **and execute** the query with the following to create the `FactResellerSales` primary key and foreign key relationships:
+14. Substitua **e execute** a consulta pelo seguinte para criar os relacionamentos de chave primária e chave estrangeira `FactResellerSales`:
 
     ```sql
     -- Create FactResellerSales PK
@@ -342,25 +342,25 @@ Nesta tarefa, você cria um esquema em estrela no banco de dados SQL, usando res
 
     ![The star schema is displayed with relationship keys.](media/star-schema-relationships.png "Star schema with relationships")
 
-## Exercise 2: Implementing a Snowflake Schema
+## Exercício 2: Implementando um esquema de floco de neve
 
-A **snowflake schema** is a set of normalized tables for a single business entity. For example, Adventure Works classifies products by category and subcategory. Categories are assigned to subcategories, and products are in turn assigned to subcategories. In the Adventure Works relational data warehouse, the product dimension is normalized and stored in three related tables: `DimProductCategory`, `DimProductSubcategory`, and `DimProduct`.
+Um **esquema de floco de neve** é um conjunto de tabelas normalizadas para uma única entidade comercial. Por exemplo, a Adventure Works classifica os produtos por categoria e subcategoria. As categorias são atribuídas a subcategorias e os produtos, por sua vez, são atribuídos a subcategorias. No data warehouse relacional da Adventure Works, a dimensão do produto é normalizada e armazenada em três tabelas relacionadas: `DimProductCategory`, `DimProductSubcategory` e `DimProduct`.
 
-The snowflake schema is a variation of the star schema. You add normalized dimension tables to a star schema to create a snowflake pattern. In the following diagram, you see the yellow dimension tables surrounding the blue fact table. Notice that many of the dimension tables relate to one another in order to normalize the business entities:
+O esquema de floco de neve é uma variação do esquema em estrela. Você adiciona tabelas de dimensões normalizadas a um esquema em estrela para criar um padrão de floco de neve. No diagrama a seguir, você vê as tabelas de dimensões amarelas ao redor da tabela de fatos azul. Observe que muitas das tabelas de dimensão se relacionam umas com as outras para normalizar as entidades comerciais:
 
-![Sample snowflake schema.](media/snowflake-schema.png "Snowflake schema")
+![Exemplo de esquema de floco de neve.](media/snowflake-schema.png "Esquema de floco de neve")
 
-### Task 1: Create product snowflake schema in SQL database
+### Tarefa 1: Criar esquema de floco de neve do produto no banco de dados SQL
 
-In this task, you add two new dimension tables: `DimProductCategory` and `DimProductSubcategory`. You create a relationship between these two tables and the `DimProduct` table to create a normalized product dimension, known as a snowflake dimension. Doing so updates the star schema to include the normalized product dimension, transforming it into a snowflake schema.
+Nesta tarefa, você adiciona duas novas tabelas de dimensão: `DimProductCategory` e `DimProductSubcategory`. Você cria uma relação entre essas duas tabelas e a tabela `DimProduct` para criar uma dimensão de produto normalizada, conhecida como dimensão de floco de neve. Isso atualiza o esquema em estrela para incluir a dimensão do produto normalizada, transformando-o em um esquema de floco de neve.
 
-1. Open Azure Data Explorer.
+1. Abra o Explorador de Dados do Azure.
 
-2. Select **Servers** in the left-hand menu, then right-click the SQL server you added at the beginning of the lab. Select **New Query**.
+2. Selecione **Servers** no menu à esquerda e clique com o botão direito do mouse no servidor SQL que você adicionou no início do laboratório. Selecione **Nova consulta**.
 
-    ![The New Query link is highlighted.](media/ads-new-query.png "New Query")
+     ![O link Nova consulta está destacado.](media/ads-new-query.png "Nova consulta")
 
-3. Paste **and execute** the following into the query window to create the new dimension tables:
+3. Cole **e execute** o seguinte na janela de consulta para criar as novas tabelas de dimensão:
 
     ```sql
     CREATE TABLE [dbo].[DimProductCategory](
